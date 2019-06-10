@@ -1,6 +1,6 @@
 class ConsoleInterface
   FIGURES =
-    Dir.glob(__dir__ + "/../data/figures/*.txt").map { |f| File.read(f) }
+    Dir.glob(__dir__ + "/../data/figures/*.txt").sort.map { |f| File.read(f) }
 
   def initialize(game)
     @game = game
