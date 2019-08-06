@@ -1,15 +1,23 @@
-require_relative 'lib/game'
-require_relative 'lib/console_interface'
+require_relative 'lib/methods'
 
 words = File.readlines(__dir__ + "/data/words.txt", chomp: true)
 
-game = Game.new(words.sample)
-console_interface = ConsoleInterface.new(game)
+# Буквы слова
+word = words.sample.chars
 
-until game.over?
-  console_interface.print_output
-  letter = console_interface.get_input
-  game.play(letter)
+# Попытки игрока
+user_guesses = []
+
+# Неправильно названные буквы
+errors = []
+
+print_rules
+
+while errors.count < 7 && (word - user_guesses).any?
+  print_output(word, user_guesses, errors)
+  letter = get_input
+  user_guesses << letter
+  errors = user_guesses - word
 end
 
-console_interface.print_output
+print_output(word, user_guesses, errors)
