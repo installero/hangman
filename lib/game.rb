@@ -7,7 +7,7 @@ class Game
   end
 
   def play(letter)
-    unless @user_guesses.include?(letter)
+    unless over? || @user_guesses.include?(letter)
       @user_guesses << letter
     end
   end
@@ -39,6 +39,10 @@ class Game
   end
 
   def won?
+    if lost?
+      return false
+    end
+
     return (@letters - @user_guesses).empty?
   end
 
