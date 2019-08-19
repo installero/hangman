@@ -7,7 +7,7 @@ class Game
   end
 
   def play(letter)
-    unless over? || @user_guesses.include?(letter)
+    if !over? && !@user_guesses.include?(letter)
       @user_guesses << letter
     end
   end
